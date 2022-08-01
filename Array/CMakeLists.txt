@@ -6,3 +6,4 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(Array main.cpp)
 
 add_executable(704 704.cpp)
+add_executable(35 35.cpp)

@@ -32,6 +32,7 @@ int search_1(vector<int>&nums, int target)  // 这里是没有用到二分法的
             return -1;
         }
     }
+    return 0;
 
 }
 
