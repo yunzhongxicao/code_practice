@@ -7,3 +7,5 @@ add_executable(Array main.cpp)
 
 add_executable(704 704.cpp)
 add_executable(35 35.cpp)
+add_executable(34 34.cpp)
+add_executable(69 69.cpp)
