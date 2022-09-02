@@ -16,7 +16,7 @@ vector<vector<int>> threeSum(vector<int>& nums);
 
 int main()
 {
-    vector<int> a = {-1,0,1,2,-1,-4};
+    vector<int> a = {0,1,-1};
     vector<vector<int>> b = threeSum(a);
     for (int i = 0; i < b.size(); ++i) {
         for (int j = 0; j < b[i].size(); ++j) {
