@@ -133,6 +133,8 @@ void BTree<elemType>::LevelOrder() {
 template <class elemType>
 void BTree<elemType>::PreOrder() {
     PreOrder(root);
+    cout<<endl;
+
 }
 
 template <class elemType>
@@ -147,6 +149,7 @@ void BTree<elemType>::PreOrder(Node<elemType> *t) {
 template <class elemType>
 void BTree<elemType>::InOrder() {
     InOrder(root)   ;
+    cout<<endl;
 }
 
 template <class elemType>
@@ -158,6 +161,63 @@ void BTree<elemType>::InOrder(Node<elemType> *t) {
     InOrder(t->right);
 }
 
+template <class elemType>
+void BTree<elemType>::PostOrder() {
+    PostOrder(root)   ;
+    cout<<endl;
+}
+
+template <class elemType>
+void BTree<elemType>::PostOrder(Node<elemType> *t) {
+    if (t==NULL)
+        return;
+    PostOrder(t->left);
+    PostOrder(t->right);
+    cout<<t->data;
+
+}
+
+template <class elemType>
+int BTree<elemType>::Size() {
+    Size(root);
+}
+
+template <class elemType>
+int BTree<elemType>::Size(Node<elemType> *t) {
+    if (t == NULL)
+        return 0;
+    return 1 + Size(t->left) + Size(t->right);
+}
+
+template <class elemType>
+int BTree<elemType>::Height() {
+    return Height(root);
+}
+
+template <class elemType>
+int BTree<elemType>::Height(Node<elemType> *t) {
+    if (!t)
+        return 0;
+    int hl= Height(t->left);
+    int hr = Height(t->right);
+    if (hl>hr)
+        return 1+hl;
+    else
+        return 1+hr;
+}
+
+template <class elemType>
+void BTree<elemType>::DelTree() {
+    DelTree(root);
+}
+
+template <class elemType>
+void BTree<elemType>::DelTree(Node<elemType> *t) {
+    if (!t) return;
+    DelTree(t->left);
+    DelTree(t->right);
+    delete t;
+}
 
 int main()
 {
@@ -165,5 +225,11 @@ int main()
     char flag = '&';
     tree_1.createTree(flag);
     tree_1.LevelOrder();
+    cout<<endl;
+    tree_1.PreOrder();
+    tree_1.InOrder();
+    tree_1.PostOrder();
+    cout<<tree_1.Size();
+    cout<<tree_1.Height();
 }
 
