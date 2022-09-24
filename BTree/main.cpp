@@ -1,5 +1,6 @@
 #include <iostream>
 #include "queue"
+#include "stack"
 
 using namespace std;
 
@@ -132,8 +133,33 @@ void BTree<elemType>::LevelOrder() {
 
 template <class elemType>
 void BTree<elemType>::PreOrder() {
-    PreOrder(root);
-    cout<<endl;
+//    PreOrder(root);  // 这是递归的写法
+//    cout<<endl;
+
+    // 下面是不递归的写法
+    stack<Node<elemType>*> my_stack;
+    Node<elemType> *p, *pl,*pr;
+    if (!root)
+        return;
+//    cout<<root->data<<" ";
+    my_stack.push(root);
+    while (!my_stack.empty())
+    {
+        p = my_stack.top();
+        my_stack.pop();
+        cout<<p->data<<" ";
+        if (p->right)
+        {
+            pr = p->right;
+            my_stack.push(pr);
+        }
+        if (p->left)
+        {
+            pl = p->left;
+            my_stack.push(pl);
+        }
+
+    }
 
 }
 
@@ -148,8 +174,11 @@ void BTree<elemType>::PreOrder(Node<elemType> *t) {
 
 template <class elemType>
 void BTree<elemType>::InOrder() {
-    InOrder(root)   ;
-    cout<<endl;
+//    InOrder(root)   ;
+//    cout<<endl;
+
+    // 非递归的写法
+
 }
 
 template <class elemType>
@@ -222,7 +251,7 @@ void BTree<elemType>::DelTree(Node<elemType> *t) {
 int main()
 {
     BTree<char> tree_1;
-    char flag = '&';
+    char flag = '.';
     tree_1.createTree(flag);
     tree_1.LevelOrder();
     cout<<endl;
