@@ -177,7 +177,104 @@ void BTree<elemType>::InOrder() {
 //    InOrder(root)   ;
 //    cout<<endl;
 
-    // 非递归的写法
+    // 非递归的写法 这是第一种写法
+/*    if (!root) return;
+
+    stack<Node<elemType>*> my_stack;
+    Node<elemType> *p,*pr,*pl;
+
+    my_stack.push(root);
+
+
+    p = root;
+    while (p->left) //先从根节点开始一路左子压到底，不弹出
+    {
+        my_stack.push(p->left);
+        p = p->left;
+    }
+
+    while (!my_stack.empty())  // 然后开始准备弹出
+    {
+        p = my_stack.top();
+        my_stack.pop();
+        cout<<p->data<<" ";
+
+        if (p->right)   // 有右子压右子，右子有左子 就一路左子压到底
+        {
+            my_stack.push(p->right);
+            p = p->right;
+
+            while (p->left)
+            {
+                my_stack.push(p->left);
+                p = p->left;
+            }
+
+        }
+    }*/
+
+    // 非递归的第二种写法，但是有点问题
+/*    if (!root) return;
+    stack<Node<elemType>*> my_stack;
+    Node<elemType> *p;
+
+    my_stack.push(root);
+
+    p = root;
+    while (!my_stack.empty())
+    {
+//        p = my_stack.top();
+        if (p->left)
+        {
+            my_stack.push(p->left);
+            p = p->left;
+            continue;
+        }
+        cout<<p->data<<" ";
+        my_stack.pop();
+        if (p->right)
+        {
+            my_stack.push(p->right);
+            p = p->right;
+            continue;
+        }
+    }*/
+
+    // 第三种写法
+    stack<Node<elemType>*> s1;
+    stack<int> s2;
+    Node<elemType> *p;
+    if (!root) return;
+
+    s1.push(root);
+    s2.push(0);
+
+    while (!s1.empty())
+    {
+        if (s2.top()==0)  // 先让左子在头顶出现（压左子）
+        {
+            p = s1.top();
+            s2.top() =1;
+            if (p->left)
+            {
+                s1.push(p->left);
+                s2.push(0);
+            }
+        }
+        else  // 是1 表明已经把左子压到了头上
+        {
+            p = s1.top(); // 然后自己出去 然后让右子进来
+            s1.pop();
+            s2.pop();
+            cout<<p->data<<" ";
+            if (p->right)
+            {
+                s1.push(p->right);
+                s2.push(0);
+            }
+
+        }
+    }
 
 }
 
@@ -192,8 +289,50 @@ void BTree<elemType>::InOrder(Node<elemType> *t) {
 
 template <class elemType>
 void BTree<elemType>::PostOrder() {
-    PostOrder(root)   ;
-    cout<<endl;
+/*    PostOrder(root)   ;
+    cout<<endl;*/
+    stack<Node<elemType>*> s1;
+    stack<int> s2;
+    Node<elemType> *p;
+
+    if (!root) return;
+
+    s1.push(root);
+    s2.push(0);
+    while (!s1.empty())
+    {
+        int flag = s2.top();
+        p = s1.top();
+        switch (flag) {
+            case 0:
+            {
+                s2.top()= 1;
+                if (p->left)
+                {
+                    s1.push(p->left);
+                    s2.push(0);
+                }
+                break;
+            }
+            case 1:
+            {
+                s2.top()=2;
+                if (p->right)
+                {
+                    s1.push(p->right);
+                    s2.push(0);
+                }
+                break;
+            }
+            case 2:
+            {
+                cout<<p->data<<" ";
+                s2.pop();
+                s1.pop();
+                break;
+            }
+        }
+    }
 }
 
 template <class elemType>
@@ -256,7 +395,9 @@ int main()
     tree_1.LevelOrder();
     cout<<endl;
     tree_1.PreOrder();
+    cout<<endl;
     tree_1.InOrder();
+    cout<<endl;
     tree_1.PostOrder();
     cout<<tree_1.Size();
     cout<<tree_1.Height();
