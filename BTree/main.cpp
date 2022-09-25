@@ -299,12 +299,12 @@ void BTree<elemType>::PostOrder() {
 
     s1.push(root);
     s2.push(0);
-    while (!s1.empty())
+/*    while (!s1.empty())   // 这种方法是左右子一次一次压
     {
         int flag = s2.top();
         p = s1.top();
         switch (flag) {
-            case 0:
+            case 0: // 状态为0 所以先压左子在头上
             {
                 s2.top()= 1;
                 if (p->left)
@@ -314,7 +314,7 @@ void BTree<elemType>::PostOrder() {
                 }
                 break;
             }
-            case 1:
+            case 1: // 左子已经压过了（且已经出去了，因为是栈顶） 压右子
             {
                 s2.top()=2;
                 if (p->right)
@@ -324,13 +324,39 @@ void BTree<elemType>::PostOrder() {
                 }
                 break;
             }
-            case 2:
+            case 2: // 左右子都压过了且出去了，此时访问自己
             {
-                cout<<p->data<<" ";
+                cout<<p->data<<" ";   // 此时栈里面剩下的都是P的祖先 所以可以用来求一个元素的所有祖先
                 s2.pop();
                 s1.pop();
                 break;
             }
+        }
+    }*/
+
+    while (!s1.empty())  // 这种方法是左右一起压
+    {
+        int flag = s2.top();
+        p = s1.top();
+        if (flag==0)
+        {
+            s2.top() = 1;
+
+            if (p->right)
+            {
+                s1.push(p->right);
+                s2.push(0);
+            }
+            if (p->left)
+            {
+                s1.push(p->left);
+                s2.push(0);
+            }
+        } else
+        {
+            cout<<p->data<<" ";
+            s1.pop();
+            s2.pop();
         }
     }
 }
