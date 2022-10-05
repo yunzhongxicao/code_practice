@@ -57,6 +57,8 @@ public:
     void InOrder();// 按中序遍历输出二叉树的结点的数据值
     void PostOrder();// 按后序遍历输出二叉树的结点的数据值
     void LevelOrder();// 按层次遍历输出二叉树的结点的数据值
+
+    Node<elemType> *bulid_Tree(vector<elemType> pre, int pl, int pr, vector<elemType> mid, int ml,int mr);
 };
 
 template <class elemType>
@@ -413,19 +415,72 @@ void BTree<elemType>::DelTree(Node<elemType> *t) {
     delete t;
 }
 
+template <class elemType>
+Node<elemType> *BTree<elemType>::bulid_Tree(vector<elemType> pre, int pl, int pr, vector<elemType> mid, int ml,int mr)
+{
+    Node<elemType> *p,*left_root,*right_root;
+    int lpl,lpr,lml,lmr;
+    int rpl,rpr,rml,rmr;
+
+    if (pl>pr) return NULL; // 相等的时候不能跳出来 因为要把这个null给连进去
+
+    p = new Node<elemType> (pre[pl]);
+    if (!root) root = p;
+
+    int i;
+    for (i = ml; i <=mr ; ++i) {
+        if (mid[i] == pre[pl])
+        {
+            break;
+        }
+    }
+    int pos = i;
+    int num = pos - ml;
+    // 找左子树
+    lpl = pl+1; lpr = pl+num;
+    lml = ml;  lmr = pos-1;
+
+    left_root = bulid_Tree(pre,lpl,lpr,mid,lml,lmr);
+
+
+    // 找右子树
+    rpl = pl+num +1; rpr = pr;
+    rml = pos+1; rmr = mr;
+    right_root = bulid_Tree(pre,rpl,rpr,mid,rml,rmr);
+
+    p->left = left_root;
+    p->right = right_root;
+
+    return p;
+
+}
+
 int main()
 {
     BTree<char> tree_1;
-    char flag = '.';
-    tree_1.createTree(flag);
-    tree_1.LevelOrder();
-    cout<<endl;
+//    char flag = '.';
+//    tree_1.createTree(flag);
+//    tree_1.LevelOrder();
+//    cout<<endl;
+//    tree_1.PreOrder();
+//    cout<<endl;
+//    tree_1.InOrder();
+//    cout<<endl;
+//    tree_1.PostOrder();
+//    cout<<tree_1.Size();
+//    cout<<tree_1.Height();
+
+    vector<char> pre = {'a','b','d','e','g','f','c'};
+    vector<char> in = {'d','b','g','e','f','a','c'};
+
+//    vector<char> pre = {'a','b'};
+//    vector<char> in = {'b','a'};
+
+    tree_1.bulid_Tree(pre,0,(int)pre.size()-1,in,0,(int)in.size()-1);
     tree_1.PreOrder();
     cout<<endl;
-    tree_1.InOrder();
-    cout<<endl;
-    tree_1.PostOrder();
-    cout<<tree_1.Size();
-    cout<<tree_1.Height();
+    tree_1.LevelOrder();
+
+
 }
 
