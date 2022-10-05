@@ -301,7 +301,7 @@ void BTree<elemType>::PostOrder() {
 
     s1.push(root);
     s2.push(0);
-/*    while (!s1.empty())   // 这种方法是左右子一次一次压
+/*    while (!s1.empty())   // 这种方法是左右子一次一次压,先压左子 左子出去；再压右子 右子出去；然后自己出去
     {
         int flag = s2.top();
         p = s1.top();
@@ -336,7 +336,7 @@ void BTree<elemType>::PostOrder() {
         }
     }*/
 
-    while (!s1.empty())  // 这种方法是左右一起压
+    while (!s1.empty())  // 这种方法是左右一起压，那么根据顺序就要先压右子 再压左子
     {
         int flag = s2.top();
         p = s1.top();
