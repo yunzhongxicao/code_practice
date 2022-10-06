@@ -19,7 +19,7 @@ public:
     TreeNode(){val=0;left=NULL;right=NULL;};
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {};
 };
-
+/* 这是迭代的写法 运用层序遍历
 int maxDepth(TreeNode* root)
 {
     queue<TreeNode*> my_queue;
@@ -43,5 +43,16 @@ int maxDepth(TreeNode* root)
         depth++;
     }
     return depth;
+}*/
+
+
+int maxDepth(TreeNode* root)
+{
+    if (!root) return 0;
+    int left_depth,right_depth;
+    left_depth = maxDepth(root->left);
+    right_depth = maxDepth(root->right);
+
+    return 1 + max(left_depth,right_depth);
 }
 
