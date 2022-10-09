@@ -19,6 +19,7 @@ public:
     TreeNode(){val=0;left=NULL;right=NULL;};
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {};
 };
+/*
 
 int minDepth(TreeNode* root)
 {
@@ -47,4 +48,24 @@ int minDepth(TreeNode* root)
         }
     }
     return depth;
+}*/
+
+
+int minDepth(TreeNode* root) // µİ¹éĞ´·¨
+{
+    int depth;
+    if (!root) return 0;
+    if (root->left== NULL)
+    {
+        return 1+minDepth(root->right);
+    } else if (root->right==NULL)
+    {
+        return 1+minDepth(root->left);
+    }
+    else
+    {
+        depth = min(minDepth(root->left),minDepth(root->right));
+        return 1+depth;
+    }
+    return 0;
 }
