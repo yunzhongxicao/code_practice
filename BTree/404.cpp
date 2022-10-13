@@ -56,3 +56,28 @@ int sumOfLeftLeaves(TreeNode* root)
     return accumulate(result.begin(),result.end(),0);
 }*/
 
+int sumOfLeftLeaves(TreeNode* root)
+{
+    stack<TreeNode*> s1;
+
+    TreeNode *p;
+    int result=0;
+
+    if (!root) return 0;
+
+    s1.push(root);
+    while (!s1.empty())
+    {
+        p = s1.top();
+        s1.pop();
+
+        if (p->left!=NULL and p->left->left==NULL and p->left->right==NULL)
+        result+=p->left->val;
+
+        if (p->left) s1.push(p->left);
+        if (p->right) s1.push(p->right);
+
+    }
+    return result;
+}
+

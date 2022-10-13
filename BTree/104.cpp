@@ -45,7 +45,10 @@ int maxDepth(TreeNode* root)
     return depth;
 }*/
 
-
+/* 这是递归的写法 但是用的是后序遍历 但是这里需要注意的是
+ * 求深度 应该是前序遍历
+ * 求高度 应该是后序遍历
+ * 这里用后序遍历的原因 是因为最大深度就是根节点的高度
 int maxDepth(TreeNode* root)
 {
     if (!root) return 0;
@@ -54,5 +57,35 @@ int maxDepth(TreeNode* root)
     right_depth = maxDepth(root->right);
 
     return 1 + max(left_depth,right_depth);
+}*/
+
+// 真正体现深度回溯的前序遍历
+void get_depth(TreeNode* p, int depth, int &result);
+int maxDepth(TreeNode* root)
+{
+    int result=0;
+    if (!root) return 0;
+    get_depth(root,1,result);
+    return result;
 }
 
+void get_depth(TreeNode* p, int depth, int &result) // 在每个节点 记录当前高度 以及一个贯穿的整体最大高度
+{
+    result = depth>result?depth:result;
+
+    if (p->left==NULL and p->right==NULL)
+        return;
+    if (p->left)
+    {
+        depth++;
+        get_depth(p->left,depth,result);
+        depth--;
+    }
+    if (p->right)
+    {
+        depth++;
+        get_depth(p->right,depth,result);
+        depth--;
+    }
+    return;
+}
