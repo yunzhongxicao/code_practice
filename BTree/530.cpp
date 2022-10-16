@@ -21,6 +21,8 @@ public:
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {};
 };
 
+
+/* µÝ¹éÐ´·¨
 TreeNode *last_node= nullptr;
 int min_value=INT32_MAX;
 void traverse(TreeNode *p);
@@ -45,5 +47,53 @@ void traverse(TreeNode *p)
     last_node=p;
 
     traverse(p->right);
+
+}*/
+
+int getMinimumDifference(TreeNode* root)
+{
+    stack<TreeNode*> s1;
+    stack<int> s2;
+    TreeNode *p;
+    TreeNode *last_node= nullptr;
+    int result=INT32_MAX;
+    if (!root) return 0;
+
+    s1.push(root);
+    s2.push(0);
+
+    while (!s1.empty())
+    {
+        p = s1.top();
+        int flag = s2.top();
+
+        if (flag==0)
+        {
+            s2.top()=1;
+            if (p->left)
+            {
+                s1.push(p->left);
+                s2.push(0);
+            }
+        }
+        else if (flag==1)
+        {
+            s1.pop();
+            s2.pop();
+            if (last_node!= nullptr)
+            {
+                int tmp = abs(p->val - last_node->val);
+                result = tmp<=result?tmp:result;
+            }
+            last_node=p;
+
+            if (p->right)
+            {
+                s1.push(p->right);
+                s2.push(0);
+            }
+        }
+    }
+    return result;
 
 }
