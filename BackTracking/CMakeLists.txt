@@ -4,3 +4,5 @@ project(BackTracking)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(BackTracking main.cpp)
+
+add_executable(77 77.cpp)
