@@ -24,3 +24,11 @@ Stack_and_Queue/cmake-build-debug/
 BTree/.idea/
 
 BTree/cmake-build-debug/
+
+BackTracking/cmake-build-debug/.cmake/api/v1/query/
+
+BackTracking/cmake-build-debug/.cmake/api/v1/reply/
+
+BackTracking/cmake-build-debug/
+
+BackTracking/.idea/
