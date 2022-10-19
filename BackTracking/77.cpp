@@ -20,5 +20,5 @@ vector<vector<int>> combine(int n, int k)
 
 void backtracking(int n, int k, int start_index)
 {
-    
+
 }
