@@ -48,9 +48,9 @@ int main()
 {
     vector<int> nums = {1,3,2,2};
     findSubsequences(nums);
-    for (int i = 0; i < result.size(); ++i) {
-        for (int j = 0; j < result[i].size(); ++j) {
-            cout<<result[i][j]<<" ";
+    for (auto & i : result) {
+        for (int j : i) {
+            cout<<j<<" ";
         }
         cout<<endl;
     }
