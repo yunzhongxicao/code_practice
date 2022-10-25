@@ -31,7 +31,7 @@ bool is_valid(int row, int col, char k, const vector<vector<char>> & board)
 bool backtracking(int row, int col, vector<vector<char>>& board)
 {
     for (int i = row; i < 9 ; ++i) {
-        for (int j = col; j < 9; ++j) {
+        for (int j = 0; j < 9; ++j) { //我不太理解为啥col要从 0开始 不应该从当前的下一个开始吗？
             if (board[i][j]!='.')continue;
             for (char k = '1'; k <='9' ; ++k) {
                 if (is_valid(i,j,k,board))
@@ -39,9 +39,9 @@ bool backtracking(int row, int col, vector<vector<char>>& board)
                     board[i][j]=k;
                     bool flag;
                     if (j<8)
-                        flag = backtracking(row,j+1,board);
+                        flag = backtracking(i,j+1,board);
                     else
-                        flag = backtracking(row+1,0,board);
+                        flag = backtracking(i+1,0,board);
                     if (flag)
                         return true;
                     else board[i][j]='.';
@@ -56,4 +56,11 @@ bool backtracking(int row, int col, vector<vector<char>>& board)
 void solveSudoku(vector<vector<char>>& board)
 {
     backtracking(0,0,board);
+}
+
+int main()
+{
+    vector<vector<char>> b = {{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},{'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'},{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
+    solveSudoku(b);
+
 }
