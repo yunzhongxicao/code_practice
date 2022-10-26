@@ -31,8 +31,14 @@ bool is_valid(int row, int col, char k, const vector<vector<char>> & board)
 bool backtracking(int row, int col, vector<vector<char>>& board)
 {
     for (int i = row; i < 9 ; ++i) {
-        for (int j = 0; j < 9; ++j) { //我不太理解为啥col要从 0开始 不应该从当前的下一个开始吗？
-            if (board[i][j]!='.')continue;
+//        for (int j = 0; j < 9; ++j) { //我不太理解为啥col要从 0开始 不应该从当前的下一个开始吗？
+        for (int j = col; j < 9; ++j) { //
+
+                if (board[i][j]!='.')
+                {
+                    if(j==8) col=0;  // 这个语句太关键了 因为除了递归要考虑特殊情况 跳出也要考虑特殊情况，不然会出现如果最后一个有值的话，continue到下一行 又直接从最后一个开始计算了
+                    continue;
+                }
             for (char k = '1'; k <='9' ; ++k) {
                 if (is_valid(i,j,k,board))
                 {
