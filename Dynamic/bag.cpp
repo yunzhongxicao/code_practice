@@ -34,8 +34,26 @@ void test_2_wei_bag_problem()
     cout << dp[weight.size() - 1][bagWeight] << endl;
 }
 
+void test_1_wei_bag_problem()
+{
+    vector<int> weight = {1, 3, 4};
+    vector<int> value = {15, 20, 30};
+    int bagWeight = 4;
+
+    // ≥ı ºªØ
+    vector<int> dp(bagWeight+1,0);
+    for (int i = 0; i < weight.size(); ++i) {
+        for (int j = bagWeight; j >=weight[i] ; --j) {
+            dp[j] = max(dp[j],dp[j-weight[i]]+value[i]);
+        }
+    }
+
+    cout<<dp[bagWeight];
+}
+
+
 int main()
 {
-    test_2_wei_bag_problem();
+    test_1_wei_bag_problem();
 }
 
