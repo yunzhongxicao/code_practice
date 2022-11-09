@@ -10,6 +10,8 @@
 
 using namespace std;
 
+/*
+
 int findTargetSumWays(vector<int>& nums, int target) // 先用二维的来写一下
 {
     int sum = accumulate(nums.begin(),nums.end(),0);
@@ -18,7 +20,9 @@ int findTargetSumWays(vector<int>& nums, int target) // 先用二维的来写一下
 
     int bag_size = (sum-target)/2;
 
-    vector<vector<int>> dp(nums.size(),vector<int>(bag_size+1,0));
+    vector<vector<int>> dp(nums.size(),vector<int>(bag_size+1,0)); 0-i范围内 选取几个数 使得和为j的方案数量
+
+    // 而且注意 这里初始化只需要初始化第一行即可 因为都是左上角相关 所以第一列其实是不需要初始化的
 
     if (nums[0] !=0) // 先处理第一个数是不是零的问题  处理完之后再判断后面的不是零的情况
     {
@@ -44,6 +48,36 @@ int findTargetSumWays(vector<int>& nums, int target) // 先用二维的来写一下
     }
     return dp.back().back();
 }
+*/
+
+int findTargetSumWays(vector<int>& nums, int target)
+{
+    int sum = accumulate(nums.begin(),nums.end(),0);
+    if (sum-target<0) return 0;
+    if ((sum-target) % 2 !=0) return 0;
+
+    int bag_size = (sum-target)/2;
+
+    vector<int> dp(bag_size+1,0);
+
+    if (nums[0]==0) dp[0]=2;
+    else
+    {
+        dp[0] =1;
+        if (nums[0]<=bag_size)
+            dp[nums[0]]=1;
+    }
+
+    for (int i = 1; i < nums.size(); ++i) {
+        for (int j = bag_size  ; j >=nums[i] ; --j) {
+            dp[j] = dp[j] + dp[j-nums[i]];
+        }
+    }
+    return dp.back();
+
+}
+
+
 
 int  main()
 {

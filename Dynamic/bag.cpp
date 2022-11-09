@@ -18,6 +18,7 @@ void test_2_wei_bag_problem()
     // 初始化
     vector<vector<int>> dp(weight.size(),vector<int>(bagWeight+1,0));
 
+    // 其实只初始化了第一行
     for (int j = 0; j <=bagWeight ; ++j) {
         if (j>=weight[0]) dp[0][j]=value[0];
     }
