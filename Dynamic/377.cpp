@@ -8,10 +8,10 @@
 #include "vector"
 #include "algorithm"
 using namespace std;
-
+/*
 int combinationSum4(vector<int>& nums, int target) // 先有二维的思想来强行做一下，强行看成背包问题
 {
-    sort(nums.begin(),nums.end());
+    sort(nums.begin(),nums.end()); // 这里这个排序是必要的 否则后面j-num[k]会超范围
     vector<vector<unsigned long long >> dp(nums.size(),vector<unsigned long long >(target+1,0));
     dp[0][0]=1;
     int tmp=1;
@@ -33,6 +33,20 @@ int combinationSum4(vector<int>& nums, int target) // 先有二维的思想来强行做一下
         }
     }
     return dp[nums.size()-1][target];
+}*/
+
+int combinationSum4(vector<int>& nums, int target)
+{
+    vector<unsigned long long > dp(target+1,0); // dp[j]表示总和和j的排列方案数
+    dp[0]=1;
+
+    for (int j = 1; j <=target ; ++j) {
+        for (int num : nums) {
+            if (j>=num)
+                dp[j]+=dp[j-num];
+        }
+    }
+    return (int)dp[target];
 
 }
 
