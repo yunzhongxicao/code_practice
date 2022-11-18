@@ -48,15 +48,14 @@ using namespace std;
 
 int maxProfit(vector<int>& prices) // 动态规划优化版本
 {
-    vector<vector<int>>dp(2,vector<int>(2));
-    dp[0][0] = -prices[0];
-    dp[0][1] = 0;
+    int dp_i_0=-prices[0];
+    int dp_i_1 = 0;
 
     for (int i = 1; i < prices.size() ; ++i) {
-        dp[i%2][0] = max(dp[(i-1)%2][0],-prices[i]); // 注意 这里只允许买一次  所以这里不是dp[i-1][1]-prices[i]
-        dp[i%2][1] = max(dp[(i-1)%2][1],dp[(i-1)%2][0]+ prices[i]);
+        dp_i_1 = max(dp_i_1,dp_i_0+ prices[i]);// 顺序不能反 否则dp_i_0就更新了 不是上一步的了
+        dp_i_0 = max(dp_i_0,-prices[i]);
     }
-    return dp[(prices.size()+1)%2][1];
+    return dp_i_1;
 
 }
 

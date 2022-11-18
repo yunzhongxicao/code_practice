@@ -19,7 +19,7 @@ int maxProfit(vector<int>& prices) // 先试下贪心算法
     return result;
 }
 */
-
+/*
 int maxProfit(vector<int>& prices) // 动规的写法
 {
     vector<vector<int>>dp(prices.size(),vector<int>(2));
@@ -30,6 +30,18 @@ int maxProfit(vector<int>& prices) // 动规的写法
         dp[i][1] = max(dp[i-1][1], dp[i-1][0] + prices[i]);
     }
     return dp[prices.size()-1][1];
+}*/
+
+int maxProfit(vector<int>& prices) // 动规的写法 空间优化
+{
+    int dp_i_0 = -prices[0];
+    int dp_i_1 = 0;
+    for (int i = 1; i < prices.size(); ++i) {
+        int tmp0 = dp_i_0,tmp1 = dp_i_1;
+        dp_i_0 = max(tmp0,tmp1-prices[i]);
+        dp_i_1 = max(tmp1,tmp0+prices[i]);
+    }
+    return dp_i_1;
 }
 
 
