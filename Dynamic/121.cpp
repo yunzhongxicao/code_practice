@@ -56,7 +56,6 @@ int maxProfit(vector<int>& prices) // 动态规划优化版本
         dp_i_0 = max(dp_i_0,-prices[i]);
     }
     return dp_i_1;
-
 }
 
 int main()
