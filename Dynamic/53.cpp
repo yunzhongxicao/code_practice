@@ -35,6 +35,5 @@ int maxSubArray(vector<int>& nums)  // ¶¯Ì¬¹æ»®
         result = max(result,dp[i]);
     }
     return result;
-
 }
 
