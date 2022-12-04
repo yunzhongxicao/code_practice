@@ -68,7 +68,7 @@ using namespace std;
     return false;
 }*/
 
-bool findNumberIn2DArray(vector<vector<int>>& matrix, int target)
+bool findNumberIn2DArray(vector<vector<int>>& matrix, int target) // 二分查找的方法
 {
     int n = matrix.size();
     if (n==0) return false;
