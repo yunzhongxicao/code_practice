@@ -33,6 +33,6 @@ int cuttingRope(int n)
         result = result % mod;
         n = n-3;
     }
-    return (int) (n * result % mod);
+    return (int) (n * result % mod);// 最后再把剩余的给乘上去
 }
 
