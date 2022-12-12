@@ -20,12 +20,25 @@ using namespace std;
     return count;
 }*/
 
-int hammingWeight(uint32_t n)
+/*int hammingWeight(uint32_t n)// 从右往左 把每一位都取出来进行比较
 {
     int count= 0;
     for (int i = 0; i < 32; ++i) {
-        
+        count += ((n>>i) & 1); 与00001进行与运算 前面都是0 只用看最后一位是不是1 是1结果就为1 直接加上去 不是1结果为0 也可以加上去
     }
+    return count;
+}*/
+
+int hammingWeight(uint32_t n) // 比到高位为0就结束
+{
+    int count = 0;
+    while (n !=0)
+    {
+        count += n&1;
+        n = n>>1;
+    }
+    return count;
+
 }
 
 
