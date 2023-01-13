@@ -8,7 +8,7 @@
 #include "vector"
 using namespace std;
 
-int reversePairs(vector<int>& nums)
+int reversePairs(vector<int>& nums) // 超时了
 {
     if (nums.size()<2) return 0;
     vector<int>dp(nums.size(),0); // dp[i]表示0-> nums[i]的对数
