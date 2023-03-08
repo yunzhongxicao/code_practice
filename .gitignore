@@ -90,3 +90,7 @@ c_plus_plus/cmake-build-debug/
 input/cmake-build-debug/
 
 input/.idea/
+
+test/.idea/
+
+test/cmake-build-debug/
