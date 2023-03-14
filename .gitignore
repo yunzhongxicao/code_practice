@@ -98,3 +98,7 @@ test/cmake-build-debug/
 meituan/.idea/
 
 meituan/cmake-build-debug/
+
+baidu/.idea/
+
+baidu/cmake-build-debug/
