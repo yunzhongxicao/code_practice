@@ -14,11 +14,11 @@ long long ans;          // 记录边权值之和
 // DFS遍历计算cnt数组
 void dfs(long long u, long long fa) {
     long long tmpcnt=0;
-    for (long long v : G[u]) {
+    for (long long v : G[u]) { // 找子节点
         if (v == fa) continue;
         tmpcnt+=1;
     }
-    if (tmpcnt==0)
+    if (tmpcnt==0) // 没有子节点，说明是叶子节点
     {
         cnt[u]=1;
         return;

@@ -62,7 +62,7 @@ void test_complete_bag_2_wei()
     int tmp=1;
     while (tmp*weight[0]<=bagWeight) // 初始化第一行
     {
-        dp[0][tmp*weight[0]] = value[0] * tmp;
+        dp[0][tmp*weight[0]] = value[0] * tmp; // 这个写法是错误的 因为这里只是恰好第一个的重量是1 如果不是1 中间会有空隙没装满 请看新的版本
         tmp++;
     }
 
