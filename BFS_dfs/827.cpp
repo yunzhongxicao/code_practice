@@ -44,22 +44,22 @@ int largestIsland(vector<vector<int>>& grid)
             }
         }
     }
-
+    unordered_set<int> my_set;
     for (int i = 0; i < grid.size(); ++i) {
         for (int j = 0; j < grid[i].size(); ++j) {
             if (grid[i][j]==0)
             {
-                unordered_map<int,int> map_temp;
+                my_set.clear();
+                int result_temp = 0;
                 for (int k = 0; k < 4; ++k) {
                     int next_x1 = i+  directions[k][0];
                     int next_x2 = j + directions[k][1];
                     if (next_x1<0 or next_x1>grid.size()-1 or next_x2<0 or next_x2>grid[0].size()-1) continue;
-                    map_temp[grid[next_x1][next_x2]]++;
-                }
-                int result_temp = 0;
-                for(auto &iter:map_temp)
-                {
-                    result_temp += my_map[iter.first];
+                    if (my_set.find(grid[next_x1][next_x2]) == my_set.end())
+                    {
+                        result_temp += my_map[grid[next_x1][next_x2]];
+                        my_set.emplace(grid[next_x1][next_x2]);
+                    }
                 }
                 result = max(result, result_temp+1);
             }
