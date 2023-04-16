@@ -11,25 +11,23 @@
 
 using namespace std;
 
-vector<string> path;
-vector<vector<string>> result;
-
-void backtracking(vector<string>& strs, vector<int> &visited, int start, unordered_map<string,vector<int>> & my_map)
-{
-
-}
 
 vector<vector<string>> groupAnagrams(vector<string>& strs)
 {
-    unordered_map<string,vector<int>> my_map;
+    unordered_map<string ,vector<string>> my_map;
     for (int i = 0; i < strs.size(); ++i) {
-        vector<int> temp(26,0);
+        string temp(26,'0');
         for (int j = 0; j < strs[i].size(); ++j) {
-            temp[strs[i][j]-'a'] ++;
+            temp[strs[i][j]-'a']++;
         }
-        my_map[strs[i]] = temp;
+        my_map[temp].push_back(strs[i]);
     }
-    vector<int> visited(strs.size(),0);
+    vector<vector<string>> result;
+    for(auto iter:my_map)
+    {
+        result.push_back(iter.second);
+    }
 
+    return result;
 }
 
