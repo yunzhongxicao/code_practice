@@ -18,15 +18,32 @@ struct TreeNode{
 
 class CBTInserter {
 public:
+    vector<TreeNode*> node_vec;
     CBTInserter(TreeNode* root) {
-
+        node_vec.push_back(nullptr);
+        queue<TreeNode *> my_queue;
+        my_queue.push(root);
+        node_vec.push_back(root);
+        while (!my_queue.empty())
+        {
+            TreeNode * temp = my_queue.front();
+            my_queue.pop();
+            node_vec.push_back(temp);
+            if (temp->left) my_queue.push(temp->left);
+            if (temp->right) my_queue.push(temp->right);
+        }
     }
 
     int insert(int v) {
-
+        TreeNode *child = new TreeNode(v);
+        node_vec.push_back(child);
+        TreeNode * parent = node_vec[(node_vec.size()-1)/2];
+        if ((node_vec.size()-1) % 2==0) parent->left = child;
+        else parent->right = child;
+        return parent->val;
     }
 
     TreeNode* get_root() {
-
+        return node_vec[1];
     }
 };
