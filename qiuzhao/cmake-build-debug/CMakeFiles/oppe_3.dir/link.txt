@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/oppe_3.dir/oppo/oppe_3.cpp.o  -o oppe_3.exe -Wl,--out-implib,liboppe_3.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
