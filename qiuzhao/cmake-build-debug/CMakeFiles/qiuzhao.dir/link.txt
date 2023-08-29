@@ -1,1 +1,0 @@
-/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/qiuzhao.dir/main.cpp.o  -o qiuzhao.exe -Wl,--out-implib,libqiuzhao.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
